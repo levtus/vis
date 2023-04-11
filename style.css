@@ -111,7 +111,6 @@ tr:nth-child(even) {
     height: 8vh;
     border: 2px solid transparent;
 	border-radius: 1vw;
-    overflow: hidden;
     background-image: url('assets/noIcon.svg');
     background-size: cover;
     display: inline;
@@ -119,9 +118,14 @@ tr:nth-child(even) {
 }
 
 .flag {
-    width: 2vh;
-    height: 2vh;
-    background-image: url('https://flagpedia.net/data/flags/icon/72x54/gb.webp');
+    width: 3.6vh;
+    height: 2.7vh;
+    background-image: url('https://flagpedia.net/data/flags/icon/72x54/null.webp');
+    background-size: cover;
+    z-index: 50;
+    position: relative;
+    right: -5.5vh;
+    top: 6vh;
 }
 .profileText {
     font-size: 4vh;

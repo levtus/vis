@@ -67,17 +67,22 @@ async function main() {
     await getStravaUserData(accessToken);
   }
 }
-
+var name
+var tag
+var profilePicture
+var creationDate
+var country
+var weight
 function displayUserData() {
-    const name = (userData.firstname + userData.lastname)
-    const tag = ("@" + userData.username)
-    const profilePicture = userData.profile
-    const creationDate = userData.created_at
-    const country = userData.country
-    const state = userData.state
-    const weight = userData.weight
+    name = (userData.firstname + userData.lastname)
+    tag = ("@" + userData.username)
+    profilePicture = userData.profile
+    creationDate = userData.created_at
+    country = userData.country
+    weight = userData.weight
     
-    document.getElementByClassName('profileIcon').style.backgroundImage=profilePicture;
-    document.getElementByClassName('profileName').innerHTML=name; 
-    document.getElementByClassName('profileTag').innerHTML=tag; 
+    document.querySelector('.profileIcon').style.backgroundImage=userData.profile;
+    document.querySelector('.flag').style.backgroundImage=("https://flagpedia.net/data/flags/icon/72x54/"+ country + ".webp")
+    document.querySelector('.profileName').innerHTML=(userData.firstname + userData.lastname); 
+    document.querySelector('.profileTag').innerHTML=("@" + userData.username); 
 }
