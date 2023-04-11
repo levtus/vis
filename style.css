@@ -1,0 +1,83 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+.tabs-container {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+}
+
+.tabs-container .tabs {
+  display: block;
+  max-width:15vw;
+  width: 15vw;    
+  height: 100vh;
+  background: #000;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  line-height:0vh;
+
+}
+
+.tabs-container .tabs .tab {
+  height:8vh;
+  display: table-cell;
+  vertical-align: middle;
+  background: #222;
+  width: 15vw;
+  cursor: pointer;
+  font-weight: bold;
+  padding-bottom: 1vh;
+}
+
+.tabs-container .tabs .tab.active {
+  background: #fff;
+  color: #222;
+}
+
+.tabs-container .content-container {
+  background: #fff;
+}
+
+.tabs-container .content-container .content {
+  display: none;
+  padding: 1vw;
+}
+
+.tabs-container .content-container .content.active {
+  display: block;
+}
+
+.tabs-container .content-container h3 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.tabs-container .content-container p {
+  line-height: 2;
+}
+
+.connectButtons {
+    align-self: flex-end;
+    position: flex;
+    margin-top: 2vh;
+    justify-content: center;
+}
+.connectButton {
+    align-self: flex-end;
+    justify-self: flex-end;
+    width: 14vw;
+    max-width: 14vw;
+}
+
+#break {
+    line-height: 25vh;
+}
+
+#minButton {
+    border-radius: 0px;
+    border: 0px;
+    font-size: 3vh;
+    
+}
