@@ -1,6 +1,7 @@
 // Replace these with your own client ID and client secret
 const clientId = '98135'
 const clientSecret = '250fb83eda23244fd4a165a4a8565f398a5e1e56';
+var userData
 
 // Step 1: Redirect the user to the Strava authorization page
 function redirectToStravaAuth() {
@@ -16,6 +17,7 @@ function redirectToStravaAuth() {
 // Step 2: Get the authorization code from the URL
 function getAuthorizationCodeFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
+  console.log(urlParams.get('code'))
   return urlParams.get('code');
 }
 
@@ -49,9 +51,9 @@ async function getStravaUserData(accessToken) {
     },
   });
 
-  const userData = await response.json();
-  return userData;
+  userData = await response.json();
   console.log(userData);
+  return userData;
 }
 
 // Main function to authorize and get data from a Strava user
@@ -66,8 +68,7 @@ async function main() {
 }
 
 function displayUserData() {
-    var profileJSON = getStravaUserData();
-    var profile = JSON.parse(profileJSON)
+    var profile = JSON.parse(userData)
     document.getElementById('profileIcon0').style.backgroundImage=profile.profile; // specify the image path here4
     document.getElementById('profileName0').style.backgroundImage=profile.profile; // specify the image path here4
     document.getElementById('profileTag0').innerHTML=profile.firstname + profile.lastname; // specify the image path here4
