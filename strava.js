@@ -5,7 +5,7 @@ const clientSecret = '18e3d21272ed60dc3b3a2090c69bbc1e7c75498a';
 // Step 1: Redirect the user to the Strava authorization page
 function redirectToStravaAuth() {
   console.log('Starting Auth Sequence')
-  const redirectUri = 'http://localhost';
+  const redirectUri = 'https://levtus.github.io/vis';
   const responseType = 'code';
   const scope = 'read,activity:read';
   const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
