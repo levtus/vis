@@ -14,7 +14,8 @@
 
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-   
+
+      
     <!-- Fullscreen Control -->
     <link rel="stylesheet" href="libraries/Control.FullScreen.css" />
     <script src="libraries/Control.FullScreen.js"></script>
@@ -26,10 +27,11 @@
     <!-- Polyline Encoded Plugin -->
     <script src="libraries/Polyline.encoded.js"></script>
     
-    <!-- Strava API JS -->
-    <script src="linkToStrava.js"></script>
+          <!-- Strava API JS -->
+    <script src="strava.js"></script>
   </head>
   <body>
+
     <div class="tabs-container">
       <div class="tabs" id="tabs">
         <div class="tab active">Stats</div><br>
@@ -37,7 +39,7 @@
         <div class="tab">Timeline</div><br>
         <div class="tab">Scatter</div><br><div id=break><br></div>
         <div class="connectButtons">
-            <a href="https://www.strava.com/oauth/authorize?client_id=98135&redirect_uri=http://localhost&response_type=code&scope=activity:read_all"><img class="connectButton" src="assets/connectWithStrava.svg"></a><br>
+            <button class="connectButton" onclick="main()"><img class="connectButton" src="assets/connectWithStrava.svg"></button><br>
             <img class="connectButton" src="assets/connectWithGarmin.png" href=""><br>
         </div>
       </div>
