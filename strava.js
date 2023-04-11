@@ -5,7 +5,7 @@ const clientSecret = '18e3d21272ed60dc3b3a2090c69bbc1e7c75498a';
 // Step 1: Redirect the user to the Strava authorization page
 function redirectToStravaAuth() {
   console.log('Starting Auth Sequence')
-  const redirectUri = 'https://levtus.github.io/vis';
+  const redirectUri = 'https:/levtus.github.io/vis';
   const responseType = 'code';
   const scope = 'read,activity:read';
   const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
@@ -49,6 +49,7 @@ async function getStravaUserData(accessToken) {
   });
 
   const userData = await response.json();
+  return userData;
   console.log(userData);
 }
 
@@ -61,4 +62,12 @@ async function main() {
     const accessToken = await getAccessToken(code);
     await getStravaUserData(accessToken);
   }
+}
+
+function displayUserData() {
+    var profileJSON = getStravaUserData();
+    var profile = JSON.parse(profileJSON)
+    document.getElementById('profileIcon0').style.backgroundImage=profile.profile; // specify the image path here4
+    document.getElementById('profileName0').style.backgroundImage=profile.profile; // specify the image path here4
+    document.getElementById('profileTag0').innerHTML=profile.firstname + profile.lastname; // specify the image path here4
 }

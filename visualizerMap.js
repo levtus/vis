@@ -95,3 +95,17 @@ window.onload = function() {
      map.invalidateSize();
     console.log('Reloading Map')
 };
+
+    for (let encoded of encodedRoutes) {
+      var coordinates = L.Polyline.fromEncoded(encoded).getLatLngs();
+
+      L.polyline(
+          coordinates,
+          {
+              color: 'blue',
+              weight: 2,
+              opacity: .7,
+              lineJoin: 'round'
+          }
+      ).addTo(map);
+    }

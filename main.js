@@ -58,7 +58,7 @@ function hideTabs() {
     console.log('Hiding Tabs')
     document.getElementById('tabs').style.display = 'none'
     document.getElementById('minButton').setAttribute( "onClick", "javascript: showTabs();" );
-    document.getElementById('minButton').innerHTML = '〉〉'
+    document.getElementById('minButton').innerHTML = '🗖'
     document.getElementById('map').style.width = '94vw';
     map.invalidateSize();
 }
@@ -67,7 +67,9 @@ function showTabs() {
     console.log('Showing Tabs')
     document.getElementById('tabs').style.display = 'block'
     document.getElementById('minButton').setAttribute( "onClick", "javascript: hideTabs();" );
-    document.getElementById('minButton').innerHTML = '〈〈'
+    document.getElementById('minButton').innerHTML = '✖'
     document.getElementById('map').style.width = '78vw';
     map.invalidateSize();
 }
+
+$('#picker').colpick();
