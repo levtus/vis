@@ -49,7 +49,6 @@ async function getStravaUserData(accessToken) {
   });
 
   const userData = await response.json();
-  return userData;
   console.log(userData);
 }
 
@@ -62,12 +61,4 @@ async function main() {
     const accessToken = await getAccessToken(code);
     await getStravaUserData(accessToken);
   }
-}
-
-function displayUserData() {
-    var profileJSON = getStravaUserData();
-    var profile = JSON.parse(profileJSON)
-    document.getElementById('profileIcon0').style.backgroundImage=profile.profile; // specify the image path here4
-    document.getElementById('profileName0').style.backgroundImage=profile.profile; // specify the image path here4
-    document.getElementById('profileTag0').innerHTML=profile.firstname + profile.lastname; // specify the image path here4
 }
