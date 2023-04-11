@@ -72,6 +72,9 @@ html,body{
     justify-self: flex-end;
     width: 14vw;
     max-width: 14vw;
+    padding: 0;
+    border: none;
+    background: none;
 }
 
 #break {
