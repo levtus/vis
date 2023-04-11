@@ -53,6 +53,7 @@ async function getStravaUserData(accessToken) {
 
   userData = await response.json();
   console.log(userData);
+    
   return userData;
 }
 
@@ -68,8 +69,15 @@ async function main() {
 }
 
 function displayUserData() {
-    var profile = JSON.parse(userData)
-    document.getElementById('profileIcon0').style.backgroundImage=profile.profile; // specify the image path here4
-    document.getElementById('profileName0').style.backgroundImage=profile.profile; // specify the image path here4
-    document.getElementById('profileTag0').innerHTML=profile.firstname + profile.lastname; // specify the image path here4
+    const name = (userData.firstname + userData.lastname)
+    const tag = ("@" + userData.username)
+    const profilePicture = userData.profile
+    const creationDate = userData.created_at
+    const country = userData.country
+    const state = userData.state
+    const weight = userData.weight
+    
+    document.getElementByClassName('profileIcon').style.backgroundImage=profilePicture;
+    document.getElementByClassName('profileName').innerHTML=name; 
+    document.getElementByClassName('profileTag').innerHTML=tag; 
 }

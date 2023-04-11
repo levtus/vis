@@ -118,6 +118,11 @@ tr:nth-child(even) {
     margin-right: 1vw;
 }
 
+.flag {
+    width: 2vh;
+    height: 2vh;
+    background-image: url('https://flagpedia.net/data/flags/icon/72x54/gb.webp');
+}
 .profileText {
     font-size: 4vh;
     padding-left: 1vw;

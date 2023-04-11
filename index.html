@@ -71,7 +71,7 @@
                         <option>Commutes Only</option>
                         <option>Races Only</option>
                     </select>
-                    <button type='button' id="statsSubmit">Get Information from Strava</button> 
+                    <button type='button' id="statsSubmit" onclick="displayUserData()">Get Information from Strava</button> 
                 </form>
             </div><br>
             <div class="data">
@@ -79,7 +79,7 @@
             <tr>
             <td class="profile">
             <div style="display: inline" class="profileInfo">
-                <img style="float: left" class="profileIcon" id="profileIcon0">
+                <p style="float: left" class="profileIcon" id="profileIcon0"><img id="flag" src="https://flagpedia.net/data/flags/icon/72x54/gb.webp"></p>
                 <div style="display: inline" class="profileText">
                     <label style="float: left" class="profileName" id="profileName0">John Doe</label>                    <br>
                     <label style="float: left" class="profileTag" id="profileTag0">@placeholder</label>
@@ -157,8 +157,10 @@
         </div>
       </div>
     </div>
+      </div>
 
     <script src="main.js"></script>
-      <img src="assets/compatibleWithStrava.svg" style="position: absolute; bottom: 0px; right: 0px; width: 4vw;">
+    
+        <img src="assets/compatibleWithStrava.svg" style="position: absolute; bottom: 0px; right: 0px; width: 4vw;">
   </body>
 </html>
