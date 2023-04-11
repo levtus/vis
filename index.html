@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="visualizerMap.css">
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+      
+    <!-- Fullscreen Control -->
+    <link rel="stylesheet" href="libraries/Control.FullScreen.css" />
+    <script src="libraries/Control.FullScreen.js"></script>
+  
+    <!-- Screenshot Control -->
+    <link rel="stylesheet" href="libraries/Leaflet.BigImage.min.css">
+    <script src="libraries/Leaflet.BigImage.min.js"></script> 
+   
+    <!-- Polyline Encoded Plugin -->
+    <script type="text/javascript" src="https://rawgit.com/jieter/Leaflet.encoded/master/Polyline.encoded.js"></script>
+      
+    <!-- Strava API JS -->
+    <script src="strava.js"></script>
+    <!-- jQuery -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- Color Picker Plugin -->
+    <script src="libraries/colpick.js"></script>
+    <link rel="stylesheet" href="libraries/colpick.css">
+
+  </head>
+  <body>
+
+    <div class="tabs-container">
+      <div class="tabs" id="tabs">
+        <div class="tab active">Stats</div><br>
+        <div class="tab">Map</div><br>
+        <div class="tab">Timeline</div><br>
+        <div class="tab">Scatter</div><br><div id=break><br></div>
+        <div class="connectButtons">
+            <button class="connectButton" onclick="main()"><img class="connectButton" src="assets/connectWithStrava.svg"></button><br>
+            <img class="connectButton" src="assets/connectWithGarmin.png" href=""><br>
+        </div>
+      </div>
+    <div id="minimize"><button id="minButton" onclick="hideTabs()">✖</button></div>
+
+      <div class="content-container">
+        <div class="content active">
+          <h3>General Statistics</h3>
+            <div class=form>
+                <form>
+                    <label>Activity Type:</label>
+                    <select>
+                        <option>All Activities</option>
+                        <option>Run</option>
+                        <option>Ride</option>
+                        <option>Water Sports</option>
+                        <option>Winter Sports</option>
+                    </select>
+                    <label>Tags:</label>
+                    <select>
+                        <option>All Activities</option>
+                        <option>Commutes Excluded</option>
+                        <option>Commutes Only</option>
+                        <option>Races Only</option>
+                    </select>
+                    <button type='button' id="statsSubmit">Get Information from Strava</button> 
+                </form>
+            </div><br>
+            <div class="data">
+            <table>
+            <tr>
+            <td class="profile">
+            <div style="display: inline" class="profileInfo">
+                <img style="float: left" class="profileIcon" id="profileIcon0">
+                <div style="display: inline" class="profileText">
+                    <label style="float: left" class="profileName" id="profileName0">John Doe</label>                    <br>
+                    <label style="float: left" class="profileTag" id="profileTag0">@placeholder</label>
+                </div>
+                <br>
+            </div>
+            </td>
+            <td class="profile">
+                <div style="float: right" class="displayDescription">Annual Ride Summary</div>
+            </td>   
+            </tr>
+            </table>
+            <table>
+              <tr>
+                <th>Time Period</th>
+                <th>Total Distance</th>
+                <th>Total Time</th>
+                <th>Moving Time</th>
+                <th>Average Speed</th>
+                <th>Total Elevation</th>   
+                <th>Total Calories</th>
+              </tr>
+              <tr class="infoRow">
+              </tr>
+            </table> 
+            </div>
+          </div>
+
+        <div class="content">
+            <div class=form>
+                <form>
+                    <label>Activity Modality:</label>
+                    <select>
+                        <option>All Activities</option>
+                        <option>Run</option>
+                        <option>Ride</option>
+                        <option>Water Sports</option>
+                        <option>Winter Sports</option>
+                    </select>
+                    <label>Activity Type:</label>
+                    <select>
+                        <option>All Activities</option>
+                        <option>Commutes Excluded</option>
+                        <option>Commutes Only</option>
+                        <option>Races Only</option>
+                    </select>
+                    <label>Mapping Style:</label>
+                    <select>
+                        <option>Single Color</option>
+                        <option>Heatmap</option>
+                        <option>Recency</option>
+                    </select>
+                    <label>Color:</label>
+                    <button type='button' id="picker">Pick</button>
+                    <button type='button' id="statsSubmit">Get Information from Strava</button> 
+                </form>
+                <br>
+
+          <div id="map" onload="map.invalidateSize()"></div>
+          <script src="visualizerMap.js"></script>
+
+        </div>
+
+        <div class="content">
+          <h3>Heading 3</h3>
+        </div>
+
+        <div class="content">
+          <h3>Heading 4</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sed
+            iure perferendis deleniti possimus consequatur ducimus officia sunt
+            minima amet!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+      <img src="assets/compatibleWithStrava.svg" style="position: absolute; bottom: 0px; right: 0px; width: 4vw;">
+  </body>
+</html>
