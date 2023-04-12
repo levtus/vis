@@ -80,14 +80,14 @@ async function getStravaUserData(accessToken) {
 // Main function to authorize and get data from a Strava user
 async function main() {
   const code = getAuthorizationCodeFromUrl();
+  const accessToken = await getAccessToken(code)
   if (!code) {
     redirectToStravaAuth();
-    const accessToken = await getAccessToken(code);
     await getStravaUserData(accessToken);
   } else {
-    const accessToken = await getAccessToken(code);
     await getStravaUserData(accessToken);
   }
+  return accessToken;
 }
 
 function displayUserData() {
@@ -105,7 +105,7 @@ function displayUserData() {
 }
 
 async function getAllUserRides() {
-    const accessToken = await getAccessToken(code);
+    const accessToken = await main();
     const apiUrl = `https://www.strava.com/api/v3/athlete/activities?before=${endDate}&after=${startDate}&per_page=${displayAmount}`;
   const response = await fetch(apiUrl, {
     headers: {
@@ -121,12 +121,12 @@ $('#picker').colpick({
     colorScheme:'dark',
     onChange:function(hsb,hex,rgb,el,bySetColor) {
     mapColor = '#' + hex;    
-    };
-}
-                         console.log("Color Changed To " + mapColor)
-                    );
+    }
+});
+console.log("Color Changed To " + mapColor);
+                    
 
-function getAllRidesData()) {
+function getAllRidesData() {
     var userActivities = getAllUserRides()
     for (let i = 0; i < userActivities.length; i++) {
        activityNames.push(userActivities[i].name);
