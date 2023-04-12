@@ -3,12 +3,13 @@ const clientSecret = '250fb83eda23244fd4a165a4a8565f398a5e1e56';
 var userData
 var startDate = 0;
 var endDate = 9999999999;
-var displayAmount = 9999; 
+var displayAmount = 9999;
+var opacity = 1;
+var mapColor = "#000000"
 
 const activityNames = [];
 const activityIds = [];
 const activityTypes = [];
-const activityDescriptions =[];
 const isCommute = [];
 const distances = [];
 const elapsedTimes = [];
@@ -66,7 +67,7 @@ async function getStravaUserData(accessToken) {
   const apiUrl = 'https://www.strava.com/api/v3/athlete';
   const response = await fetch(apiUrl, {
     headers: {
-      'Authorization': `Bearer ${acceassToken}`,
+      'Authorization': `Bearer ${accessToken}`,
     },
   });
 
@@ -103,18 +104,16 @@ function displayUserData() {
     document.querySelector('.profileTag').innerHTML=("@" + userData.username); 
 }
 
-function getAllUserRides() {
+async function getAllUserRides() {
     const accessToken = await getAccessToken(code);
     const apiUrl = `https://www.strava.com/api/v3/athlete/activities?before=${endDate}&after=${startDate}&per_page=${displayAmount}`;
   const response = await fetch(apiUrl, {
     headers: {
-      'Authorization': `Bearer ${acceassToken}`,
+      'Authorization': `Bearer ${accessToken}`,
     },
   });
-  userActivities = await response.json();
+  var userActivities = await response.json();
   console.log(userActivities);
-
-    
   return userActivities;
 }
 
@@ -122,12 +121,12 @@ $('#picker').colpick({
     colorScheme:'dark',
     onChange:function(hsb,hex,rgb,el,bySetColor) {
     mapColor = '#' + hex;    
-    }
+    };
+    console.log("Color Changed To " + mapColor)
 });
-var opacity = 1;
 
-function getAllRidesData {
-    userActivities = getAllUserRides()
+function getAllRidesData()) {
+    var userActivities = getAllUserRides()
     for (let i = 0; i < userActivities.length; i++) {
        activityNames.push(userActivities[i].name);
        activityIds.push(userActivities[i].id);
