@@ -90,7 +90,8 @@ async function main() {
 }
 
 function displayUserData() {
-    main()
+    var accessToken = main()
+    var userdata = getStravaUserData(accessToken)
     name = (userData.firstname + " " + userData.lastname)
     tag = ("@" + userData.username)
     profilePicture = userData.profile
