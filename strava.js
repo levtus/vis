@@ -122,8 +122,9 @@ $('#picker').colpick({
     onChange:function(hsb,hex,rgb,el,bySetColor) {
     mapColor = '#' + hex;    
     };
-    console.log("Color Changed To " + mapColor)
-});
+}
+                         console.log("Color Changed To " + mapColor)
+                    );
 
 function getAllRidesData()) {
     var userActivities = getAllUserRides()
