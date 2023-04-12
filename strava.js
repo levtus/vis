@@ -70,7 +70,6 @@ async function main() {
 
 function displayUserData() {
     main()
-    main()
     name = (userData.firstname + " " + userData.lastname)
     tag = ("@" + userData.username)
     profilePicture = userData.profile
