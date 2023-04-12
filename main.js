@@ -1,6 +1,6 @@
 const tabs = document.querySelectorAll(".tabs-container .tab");
 const contents = document.querySelectorAll(".tabs-container .content");
-
+var mapColor = "#000000"
 const removeActiveClass = () => {
   tabs.forEach((t) => {
     t.classList.remove("active");
@@ -71,5 +71,3 @@ function showTabs() {
     document.getElementById('map').style.width = '78vw';
     map.invalidateSize();
 }
-
-$('#picker').colpick();

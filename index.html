@@ -35,6 +35,10 @@
     <!-- Color Picker Plugin -->
     <script src="libraries/colpick.js"></script>
     <link rel="stylesheet" href="libraries/colpick.css">
+      
+    <!-- Date and Time Picker Plugin -->
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
+    <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
 
   </head>
   <body>
@@ -44,7 +48,7 @@
         <div class="tab active">Stats</div><br>
         <div class="tab">Map</div><br>
         <div class="tab">Timeline</div><br>
-        <div class="tab">Scatter</div><br><div id=break><br></div>
+        <div class="tab">Scatter</div><br>
         <div class="connectButtons">
             <button class="connectButton" onclick="main()"><img class="connectButton" src="assets/connectWithStrava.svg"></button><br>
             <!-- <img class="connectButton" src="assets/connectWithGarmin.png" href=""><br> -->
@@ -128,14 +132,14 @@
                         <option>Races Only</option>
                     </select>
                     <label>Mapping Style:</label>
-                    <select>
+                    <select id="mapStyle">
                         <option>Single Color</option>
                         <option>Heatmap</option>
                         <option>Recency</option>
                     </select>
                     <label>Color:</label>
                     <button type='button' id="picker">Pick</button>
-                    <button type='button' id="statsSubmit">Get Information from Strava</button> 
+                    <button type='button' id="statsSubmit">Map</button> 
                 </form>
                 <br>
 

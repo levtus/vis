@@ -1,7 +1,25 @@
-// Replace these with your own client ID and client secret
 const clientId = '98135'
 const clientSecret = '250fb83eda23244fd4a165a4a8565f398a5e1e56';
 var userData
+var startDate = 0;
+var endDate = 9999999999;
+var displayAmount = 9999; 
+
+const activityNames = [];
+const activityIds = [];
+const activityTypes = [];
+const activityDescriptions =[];
+const isCommute = [];
+const distances = [];
+const elapsedTimes = [];
+const movingTimes = [];
+const averageWatts = [];
+const kiloJoules = [];
+
+const startDates = [];
+const kudosCounts = [];
+const achievementCounts = [];
+const polylines = [];
 
 // Step 1: Redirect the user to the Strava authorization page
 function redirectToStravaAuth() {
@@ -12,6 +30,7 @@ function redirectToStravaAuth() {
   const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
 
   window.location.href = authUrl;
+    
 }
 
 // Step 2: Get the authorization code from the URL
@@ -47,7 +66,7 @@ async function getStravaUserData(accessToken) {
   const apiUrl = 'https://www.strava.com/api/v3/athlete';
   const response = await fetch(apiUrl, {
     headers: {
-      'Authorization': `Bearer ${accessToken}`,
+      'Authorization': `Bearer ${acceassToken}`,
     },
   });
 
@@ -62,6 +81,8 @@ async function main() {
   const code = getAuthorizationCodeFromUrl();
   if (!code) {
     redirectToStravaAuth();
+    const accessToken = await getAccessToken(code);
+    await getStravaUserData(accessToken);
   } else {
     const accessToken = await getAccessToken(code);
     await getStravaUserData(accessToken);
@@ -76,8 +97,69 @@ function displayUserData() {
     creationDate = userData.created_at
     country = userData.country
     weight = userData.weight
-    document.getElementById('.profileIcon').style.backgroundImage = url(${userData.profile});
+    document.getElementById('.profileIcon').style.backgroundImage = `url('${userData.profile}')`;
     document.querySelector('.flag').style.backgroundImage=("https://flagpedia.net/data/flags/icon/72x54/"+ country + ".webp")
     document.querySelector('.profileName').innerHTML=(userData.firstname + " " + userData.lastname); 
     document.querySelector('.profileTag').innerHTML=("@" + userData.username); 
+}
+
+function getAllUserRides() {
+    const accessToken = await getAccessToken(code);
+    const apiUrl = `https://www.strava.com/api/v3/athlete/activities?before=${endDate}&after=${startDate}&per_page=${displayAmount}`;
+  const response = await fetch(apiUrl, {
+    headers: {
+      'Authorization': `Bearer ${acceassToken}`,
+    },
+  });
+  userActivities = await response.json();
+  console.log(userActivities);
+
+    
+  return userActivities;
+}
+
+$('#picker').colpick({
+    colorScheme:'dark',
+    onChange:function(hsb,hex,rgb,el,bySetColor) {
+    mapColor = '#' + hex;    
+    }
+});
+var opacity = 1;
+
+function getAllRidesData {
+    userActivities = getAllUserRides()
+    for (let i = 0; i < userActivities.length; i++) {
+       activityNames.push(userActivities[i].name);
+       activityIds.push(userActivities[i].id);
+       activityTypes.push(userActivities[i].type);
+       isCommute.push(userActivities[i].commute);
+       polylines.push(userActivities[i].map.summary_polyline)
+       distances.push(userActivities[i].distance);
+       elapsedTimes.push(userActivities[i].elapsed_time);
+       movingTimes.push(userActivities[i].moving_time);
+       averageWatts.push(userActivities[i].average_watts);
+       kiloJoules.push(userActivities[i].kilojoules);
+       startDates.push(userActivities[i].start_date_local);
+       kudosCounts.push(userActivities[i].kudos_count);
+       achievementCounts.push(userActivities[i].achievement_count);     
+  }
+  var mapStyle = document.getElementById('mapStyle').selectedOptions[0].value;
+    if (mapStyle = "Heatmap") {
+        opacity = 0.3;
+    } else {
+        opacity = 1;
+   }
+
+  for (let i = 0; i < polylines.length; i++) {
+        var coordinates = L.Polyline.fromEncoded(userActivities[i].map.summary_polyline).getLatLngs()
+         L.polyline(
+            coordinates,
+                {
+                color: mapColor,
+                weight:5,
+                opacity:opacity,
+                lineJoin:'round'
+                }
+        ).addTo(map)
+  }
 }

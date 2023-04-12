@@ -9,14 +9,15 @@ html,body{
     height: 100%;
 }
 .tabs-container {
-  font-family: "Roboto", sans-serif;
+  font-family: "trueno";
   display: flex;
+  min-width: 150px;
 }
 
 .tabs-container .tabs {
   display: block;
-  max-width:15vw;
-  width: 15vw;    
+  min-width:150px;
+  width: 13vw;    
   height: 100vh;
   background: #000;
   color: #fff;
@@ -31,15 +32,19 @@ html,body{
   display: table-cell;
   vertical-align: middle;
   background: #222;
-  width: 15vw;
+  min-width: 150px;
+  width: 13vw;
   cursor: pointer;
   font-weight: bold;
   padding-bottom: 1vh;
 }
 
 .tabs-container .tabs .tab.active {
+  display: table-cell;
   background: #fff;
   color: #222;
+  min-width: 100px;
+  width: 15vw;
 }
 
 .tabs-container .content-container {
@@ -53,6 +58,7 @@ html,body{
 
 .tabs-container .content-container .content.active {
   display: block;
+  min-width: 15vw;
 }
 
 .tabs-container .content-container h3 {
@@ -71,14 +77,15 @@ html,body{
     border: none;
     background: none;
     position: fixed;
-    left: 0.5vw;
-    bottom: 0.5vw;
+    left: 0.4vw;
+    bottom: 0.4vw;
+    display: flex;
+    align-items: flex-end;
+    width: 12vw;
+    min-width: 140px;
 }
 .connectButton {
-display: flex;
-align-items: flex-end;
-    width: 14vw;
-    max-width: 14vw;
+
 }
 
 #break {
@@ -127,7 +134,7 @@ div.form * {
 .flag {
     width: 3.6vh;
     height: 2.7vh;
-    background-image: url('https://flagpedia.net/data/flags/icon/72x54/null.webp');
+    background-image: url('');
     background-size: cover;
     z-index: 50;
     position: relative;
