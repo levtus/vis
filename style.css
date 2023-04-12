@@ -65,13 +65,14 @@ html,body{
 }
 
 .connectButton {
-    align-self: flex-end;
-    position: flex;
     margin-top: 2vh;
     justify-content: center;
     padding: 0;
     border: none;
     background: none;
+    position: fixed;
+    left: 0.5vw;
+    bottom: 0.5vw;
 }
 .connectButton {
 display: flex;
@@ -106,6 +107,12 @@ tr:nth-child(even) {
     border: 0px;
     padding: 0px;
 }
+
+div.form * {
+    font-family: "trueno";
+    font-size: 2vh;    
+}
+
 .profileIcon {
     width: 8vh;
     height: 8vh;
@@ -141,6 +148,7 @@ tr:nth-child(even) {
 
 .displayDescription {
     font-family: "trueno";
-    padding-left: 1vw;
+    float: right;
+    padding-left: 10vw;
     font-size: 6vh;    
 }
