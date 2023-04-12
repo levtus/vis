@@ -67,23 +67,17 @@ async function main() {
     await getStravaUserData(accessToken);
   }
 }
-var name
-var tag
-var profilePicture
-var creationDate
-var country
-var weight
+
 function displayUserData() {
     main()
     main()
-    name = (userData.firstname + userData.lastname)
+    name = (userData.firstname + " " + userData.lastname)
     tag = ("@" + userData.username)
     profilePicture = userData.profile
     creationDate = userData.created_at
     country = userData.country
     weight = userData.weight
-    
-    document.querySelector('.profileIcon').style.backgroundImage=url(userData.profile);
+    document.getElementById('.profileIcon').style.backgroundImage = url(${userData.profile});
     document.querySelector('.flag').style.backgroundImage=("https://flagpedia.net/data/flags/icon/72x54/"+ country + ".webp")
     document.querySelector('.profileName').innerHTML=(userData.firstname + " " + userData.lastname); 
     document.querySelector('.profileTag').innerHTML=("@" + userData.username); 
