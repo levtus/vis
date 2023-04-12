@@ -3,7 +3,6 @@ const clientSecret = '250fb83eda23244fd4a165a4a8565f398a5e1e56';
 var userData
 var startDate = 0;
 var endDate = 9999999999;
-var displayAmount = 9999;
 var opacity = 1;
 var mapColor = "#000000"
 
@@ -106,7 +105,7 @@ function displayUserData() {
 
 async function getAllUserRides() {
     const accessToken = await main();
-    const apiUrl = `https://www.strava.com/api/v3/athlete/activities?before=${endDate}&after=${startDate}&per_page=${displayAmount}`;
+    const apiUrl = `https://www.strava.com/api/v3/athlete/activities?before=${endDate}&after=${startDate}`;
   const response = await fetch(apiUrl, {
     headers: {
       'Authorization': `Bearer ${accessToken}`,
