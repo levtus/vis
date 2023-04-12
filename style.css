@@ -126,7 +126,7 @@ div.form * {
     border: 2px solid transparent;
 	border-radius: 1vw;
     background-image: url('assets/noIcon.svg');
-    background-size: cover;
+    background-size: contain;
     display: inline;
     margin-right: 1vw;
 }
