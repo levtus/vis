@@ -140,6 +140,18 @@
                     </select>
                     <label>Color:</label>
                     <button type='button' id="picker">Pick</button>
+                    <script>
+                        $('#picker').colpick({
+                            colorScheme:'dark',
+                            layout:'hex',
+                            onChange:function(hsb,hex,rgb,el,bySetColor) {
+                                mapColor = ("#" + hex)
+                            },
+                            onSubmit:function(hex) {
+                                mapColor = ("#" + hex)
+                                $('#picker').colpickHide()
+                        }});
+                    </script>
                     <button type='button' id="statsSubmit">Map</button> 
                 </form>
                 <br>

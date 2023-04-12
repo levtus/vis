@@ -76,7 +76,6 @@ async function getStravaUserData(accessToken) {
     
   return userData;
 }
-
 // Main function to authorize and get data from a Strava user
 async function main() {
   const code = getAuthorizationCodeFromUrl();
@@ -117,13 +116,6 @@ async function getAllUserRides() {
   return userActivities;
 }
 
-$('#picker').colpick({
-    colorScheme:'dark',
-    onChange:function(hsb,hex,rgb,el,bySetColor) {
-    mapColor = '#' + hex;    
-    }
-});
-console.log("Color Changed To " + mapColor);
                     
 
 function getAllRidesData() {
