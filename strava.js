@@ -98,7 +98,7 @@ function displayUserData() {
     creationDate = userData.created_at
     country = userData.country
     weight = userData.weight
-    document.getElementById('.profileIcon').style.backgroundImage = `url('${userData.profile}')`;
+    document.querySelector('.profileIcon').style.backgroundImage = `url('${userData.profile}')`;
     document.querySelector('.flag').style.backgroundImage=("https://flagpedia.net/data/flags/icon/72x54/"+ country + ".webp")
     document.querySelector('.profileName').innerHTML=(userData.firstname + " " + userData.lastname); 
     document.querySelector('.profileTag').innerHTML=("@" + userData.username); 
