@@ -28,7 +28,7 @@ const polylines = [];
 
 window.addEventListener("load", (event) => {
   getAuthorizationCodeFromUrl() 
-  if (code.length > 0) {
+  if (code) {
     console.log('Code Found on Load') 
   } else {
     console.log('Code Not Present on Load') 
