@@ -137,7 +137,13 @@ function getActivities() {
     getAccessToken(code) 
     const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}`
     fetch(activitiesLink)
-        .then((allActivities) => console.log(allActivities.json()))
+    .then((allActivities) => {
+        return allActivities.json();
+    })
+    .then((activityData) => {
+        allActivities = activityData;
+        console.log(allActivities)
+    });
 }
 
 function activitiesExec() {
@@ -158,7 +164,7 @@ function activitiesExec() {
     }
 }
 
-function gegettAllRidesData() {
+function getAllRidesData() {
     if (!allActivities) {
         getActivities()
     };
