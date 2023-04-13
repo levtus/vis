@@ -135,7 +135,7 @@ function displayUserData() {
 
 function getActivities() {
     getAccessToken(code) 
-    const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}`
+    const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}&per_page="999"`
     fetch(activitiesLink)
     .then((allActivities) => {
         return allActivities.json();
