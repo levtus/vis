@@ -95,6 +95,7 @@ async function getStravaUserData() {
 
 // Check that all steps have been completed
 function check() {
+    displayUserData()
     if (code) {
         console.log('Auth Code is Present')
     } else {
@@ -134,8 +135,8 @@ function displayUserData() {
 
 
 function getActivities() {
-    getAccessToken(code) 
-    const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}&per_page="999"`
+    getAccessToken() 
+    const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}&per_page=99`
     fetch(activitiesLink)
     .then((allActivities) => {
         return allActivities.json();
@@ -173,7 +174,7 @@ function getAllRidesData() {
        activityIds.push(allActivities[i].id);
        activityTypes.push(allActivities[i].type);
        isCommute.push(allActivities[i].commute);
-       polylines.push(allActivities[i].map.summary_polyline)
+       polylines.push(allActivities[i].map.summary_polyline);
        distances.push(allActivities[i].distance);
        elapsedTimes.push(allActivities[i].elapsed_time);
        movingTimes.push(allActivities[i].moving_time);
@@ -195,17 +196,22 @@ function mapRides() {
     } else {
         opacity = 1;
     }
-    for (let i = 0; i < polylines.length; i++) {
-        var coordinates = L.Polyline.fromEncoded(allActivities[i].map.summary_polyline).getLatLngs()
-         L.polyline(
-            coordinates,
-                {
-                color: mapColor,
-                weight:5,
-                opacity:opacity,
-                lineJoin:'round'
-                }
-        ).addTo(map)
-    };
-    mapped = 1;
+            for(var x=0; x<allRides.length; x++){
+
+                console.log(allRides[x].map.summary_polyline)
+                var coordinates = L.Polyline.fromEncoded(data[x].map.summary_polyline).getLatLngs()
+                console.log(coordinates)
+
+                L.polyline(
+                    coordinates,
+                    {
+                        color: mapColor,
+                        weight:5,
+                        opacity: opacity,
+                        lineJoin:'round'
+                    }
+
+                ).addTo(map)
+            }
+mapped = 1;
 }
