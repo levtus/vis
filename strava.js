@@ -2,6 +2,7 @@ const clientId = '98135'
 const clientSecret = '250fb83eda23244fd4a165a4a8565f398a5e1e56';
 var code
 var userData
+var data
 var accessToken
 var startDate = 0;
 var endDate = 9999999999;
@@ -48,13 +49,16 @@ function redirectToStravaAuth() {
 function getAuthorizationCodeFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     code = urlParams.get('code');
-    console.log(code)
-    return code
+    if (code) {
+        console.log(code)
+        return code
+    } else {
+        redirectToStravaAuth()
+    }
 }
 
 // Exchange the authorization code for an access token
 async function getAccessToken(code) {
-  let data;
   const tokenUrl = 'https://www.strava.com/oauth/token';
   if (!data || !data.access_token) {
     const response = await fetch(tokenUrl, {
