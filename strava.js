@@ -427,9 +427,9 @@ function mapRides() {
     } else {
         opacity = 1;
     }
-            for(var x=0; x<allRides.length; x++){
+            for(var x=0; x<allActivities.length; x++){
 
-                console.log(allRides[x].map.summary_polyline)
+                console.log(allActivities[x].map.summary_polyline)
                 var coordinates = L.Polyline.fromEncoded(data[x].map.summary_polyline).getLatLngs()
                 console.log(coordinates)
 
