@@ -77,7 +77,7 @@
                         <option>Commutes Only</option>
                         <option>Races Only</option>
                     </select>
-                    <button type='button' id="statsSubmit" onclick="displayUserData()">Get Information from Strava</button> 
+                    <button type='button' id="statsSubmit" onclick="activitiesExec()">Get Information from Strava</button> 
                 </form>
             </div><br>
             <div class="data">
@@ -152,7 +152,7 @@
                                 $('#picker').colpickHide()
                         }});
                     </script>
-                    <button type='button' id="statsSubmit" onclick="getAllRidesData()">Map Activities</button> 
+                    <button type='button' id="statsSubmit" onclick="activitiesExec()">Map Activities</button> 
                 </form>
                 <br>
           <div id="map" onload="map.invalidateSize()"></div>
