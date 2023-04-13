@@ -131,6 +131,15 @@ function displayUserData() {
     document.querySelector('.profileTag').innerHTML=("@" + userData.username); 
 }
 
+
+
+function getActivities() {
+    getAccessToken(code) 
+    const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}`
+    fetch(activitiesLink)
+        .then((allActivities) => console.log(allActivities.json()))
+}
+
 function activitiesExec() {
     if (allActivities) {
         console.log('Activity Data is Present')
@@ -149,20 +158,13 @@ function activitiesExec() {
     }
 }
 
-function getActivites() {
-    getAccessToken(code) 
-    const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}`
-    fetch(activitiesLink)
-        .then((allActivities) => console.log(allActivities.json()))
-}
-
-function getAllRidesData() {
+function gegettAllRidesData() {
     if (!allActivities) {
         getActivities()
     };
     for (let i = 0; i < allActivities.length; i++) {
        activityNames.push(allActivities[i].name);
-       activityIds.push(allActivities[i].id);
+  get     activityIds.push(allActivities[i].id);
        activityTypes.push(allActivities[i].type);
        isCommute.push(allActivities[i].commute);
        polylines.push(allActivities[i].map.summary_polyline)
