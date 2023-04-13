@@ -24,7 +24,7 @@ const kudosCounts = [];
 const achievementCounts = [];
 const polylines = [];
 
-// Step 1: Redirect the user to the Strava authorization page
+// Redirect the user to the Strava authorization page
 function redirectToStravaAuth() {
   console.log('Starting Auth Sequence')
   const redirectUri = 'https://levtus.github.io/vis';
@@ -34,14 +34,14 @@ function redirectToStravaAuth() {
   window.location.href = authUrl;
 }
 
-// Step 2: Get the authorization code from the URL
+// Get the authorization code from the URL
 function getAuthorizationCodeFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
   console.log(urlParams.get('code'))
   return urlParams.get('code');
 }
 
-// Step 3: Exchange the authorization code for an access token
+// Exchange the authorization code for an access token
 async function getAccessToken(code) {
     const tokenUrl = 'https://www.strava.com/oauth/token';
     if (typeof data.access_token != undefined) {
@@ -66,7 +66,7 @@ async function getAccessToken(code) {
     return data.access_token;
 }
 
-// Step 4: Use the access token to make requests to the Strava API
+// Get Basic User Information
 async function getStravaUserData() {
     const apiUrl = 'https://www.strava.com/api/v3/athlete';
     const response = fetch(apiUrl, {
@@ -78,22 +78,26 @@ async function getStravaUserData() {
     console.log(userData);
     return userData;
 }
-// Main function to authorize and get data from a Strava user
-function main () {
+
+// Check that all steps have been completed
+function check () {
     if (!code) {
         redirectToStravaAuth();    
     } else if (!accessToken) {
+        console.log("Code Present")
         getAccessToken(code) 
     } else if {!userdata} {
+        console.log("Access Token Present")
         getStravaUserData()
+    } else {
+        console.log("Profile Data Present")
     }
 }
 
-
 function displayUserData() {
-    main()
-    main()
-    main()
+    check()
+    check()
+    check()
     name = (userData.firstname + " " + userData.lastname)
     tag = ("@" + userData.username)
     profilePicture = userData.profile
@@ -107,9 +111,9 @@ function displayUserData() {
 }
 
 async function getAllUserRides() {
-    main()
-    main()
-    main()
+    check()
+    check()
+    check()
     const apiUrl = `https://www.strava.com/api/v3/athlete/activities?before=${endDate}&after=${startDate}&per_page=${displayAmount}`;
     const response = await fetch(apiUrl, {
     headers: {
