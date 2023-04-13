@@ -82,7 +82,7 @@ async function getAccessToken(code) {
 // Get Basic User Information
 async function getStravaUserData() {
     const apiUrl = 'https://www.strava.com/api/v3/athlete';
-    const response = fetch(apiUrl, {
+    const response = await fetch(apiUrl, {
         headers: {
         'Authorization': `Bearer ${accessToken}`,
         },
