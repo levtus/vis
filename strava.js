@@ -76,7 +76,7 @@ async function getAccessToken(code) {
   } else {
     console.log("Access Token Already Ready") 
   }
-  const accessToken = data.access_token;
+  accessToken = data.access_token;
   return accessToken;
 }
  
@@ -133,21 +133,13 @@ function displayUserData() {
     document.querySelector('.profileTag').innerHTML=("@" + userData.username); 
 }
 
-async function getAllUserRides() {
-    check()
-    check()
-    check()
-    const apiUrl = `https://www.strava.com/api/v3/athlete/activities?before=${endDate}&after=${startDate}&per_page=${displayAmount}`;
-    const response = await fetch(apiUrl, {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-    },
-  });
-    console.log(response)
-  userActivities = await response.json();
-  console.log(userActivities);
-  return userActivities;
-} 
+
+function getActivites(){
+    getAccessToken(code) 
+    const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}`
+    fetch(activitiesLink)
+        .then((data) => console.log(data.json()))
+}
 
 function getAllRidesData() {
     if (!userActivities) {
