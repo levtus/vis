@@ -27,7 +27,7 @@ const polylines = [];
 
 window.addEventListener("load", (event) => {
   getAuthorizationCodeFromUrl() 
-  if (code) {
+  if (code.length > 0) {
     console.log('Code Found on Load') 
   } else {
     console.log('Code Not Present on Load') 
@@ -52,29 +52,29 @@ function getAuthorizationCodeFromUrl() {
 
 // Exchange the authorization code for an access token
 async function getAccessToken(code) {
-    const tokenUrl = 'https://www.strava.com/oauth/token';
-    if (typeof data.access_token != undefined) {
-        const response = await fetch(tokenUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-            body: JSON.stringify({
-                client_id: clientId,
-                client_secret: clientSecret,
-                code: code,
-                grant_type: 'authorization_code',
-        }),
+  let data;
+  const tokenUrl = 'https://www.strava.com/oauth/token';
+  if (!data || !data.access_token) {
+    const response = await fetch(tokenUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        client_id: clientId,
+        client_secret: clientSecret,
+        code: code,
+        grant_type: 'authorization_code', 
+      }),
     });
-    const data = await response.json();
+    data = await response.json(); 
     console.log(data.access_token)
-    } else {
-        console.log("Access Token Already Ready")
-    }
-    accessToken = data.access_token;
-    return data.access_token;
+  } else {
+    console.log("Access Token Already Ready") 
+  }
+  const accessToken = data.access_token;
+  return accessToken;
 }
-
 // Get Basic User Information
 async function getStravaUserData() {
     const apiUrl = 'https://www.strava.com/api/v3/athlete';
