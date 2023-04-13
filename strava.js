@@ -10,25 +10,29 @@ var opacity = 1;
 var mapColor = "#000000"
 var userActivities
 
-var activityNames = [];
-var activityIds = [];
-var activityTypes = [];
-var isCommute = [];
-var distances = [];
-var elapsedTimes = [];
-var movingTimes = [];
-var averageWatts = [];
-var kiloJoules = [];
+const activityNames = [];
+const activityIds = [];
+const activityTypes = [];
+const isCommute = [];
+const distances = [];
+const elapsedTimes = [];
+const movingTimes = [];
+const averageWatts = [];
+const kiloJoules = [];
 
-var startDates = [];
-var kudosCounts = [];
-var achievementCounts = [];
-var polylines = [];
+const startDates = [];
+const kudosCounts = [];
+const achievementCounts = [];
+const polylines = [];
 
 window.addEventListener("load", (event) => {
-  getAuthorizationCodeFromUrl()
+  getAuthorizationCodeFromUrl() 
+  if (code) {
+    console.log('Code Found on Load') 
+  } else {
+    console.log('Code Not Present on Load') 
+  }
 });
-
 // Redirect the user to the Strava authorization page
 function redirectToStravaAuth() {
   console.log('Starting Auth Sequence')
@@ -86,16 +90,26 @@ async function getStravaUserData() {
 
 // Check that all steps have been completed
 function check () {
-    if (!code) {
-       redirectToStravaAuth();  
-    } else if (!accessToken) {
-        console.log("Code Present")
-        getAccessToken(code) 
-    } else if (!userdata) {
-        console.log("Access Token Present")
-        getStravaUserData()
+    if (code) {
+        console.log('Auth Code is Present')
     } else {
-        console.log("Profile Data Present")
+        getAuthorizationCodeFromUrl()
+        if (code) {
+            console.log('Auth Code is Present')
+        } else {
+            redirectToStravaAuth()
+            getAuthorizationCodeFromUrl()
+        }
+    }
+    if (accessToken) {
+        console.log('Access Token is Present')
+    } else {
+        getAccessToken(code)
+    }
+    if (userData) {
+        console.log("User Data is Present")
+    } else {
+        getStravaUserData()    
     }
 }
 
