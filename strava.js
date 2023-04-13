@@ -212,6 +212,7 @@ function mapRides() {
 
                 ).addTo(map)
             }
+    map.fitBounds(coordinates.getBounds().pad(0.5)); 
 mapped = 1;
 }
 
@@ -226,10 +227,5 @@ function bigBoyFunction() {
         getActivities()
         getAllRidesData()
         mapRides()
-    }
-}
-    
-    
-console.log('blank')
-    
+    }    
 }
