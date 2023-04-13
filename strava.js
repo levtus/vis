@@ -5,7 +5,7 @@ var userData
 var data
 var accessToken
 var startDate = 0;
-var endDate = 9999999999;
+var endDate = (Date.now() / 1000 );
 var displayAmount = 999;
 var opacity = 1;
 var mapColor = "#000000"
@@ -72,13 +72,14 @@ async function getAccessToken(code) {
       }),
     });
     data = await response.json(); 
-    console.log(data.access_token)
+    console.log("Access Token = " + data.access_token)
   } else {
     console.log("Access Token Already Ready") 
   }
   const accessToken = data.access_token;
   return accessToken;
 }
+ 
 // Get Basic User Information
 async function getStravaUserData() {
     const apiUrl = 'https://www.strava.com/api/v3/athlete';
@@ -142,6 +143,7 @@ async function getAllUserRides() {
       'Authorization': `Bearer ${accessToken}`,
     },
   });
+    console.log(response)
   userActivities = await response.json();
   console.log(userActivities);
   return userActivities;
