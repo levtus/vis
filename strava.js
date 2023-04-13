@@ -10,20 +10,24 @@ var opacity = 1;
 var mapColor = "#000000"
 var userActivities
 
-const activityNames = [];
-const activityIds = [];
-const activityTypes = [];
-const isCommute = [];
-const distances = [];
-const elapsedTimes = [];
-const movingTimes = [];
-const averageWatts = [];
-const kiloJoules = [];
+var activityNames = [];
+var activityIds = [];
+var activityTypes = [];
+var isCommute = [];
+var distances = [];
+var elapsedTimes = [];
+var movingTimes = [];
+var averageWatts = [];
+var kiloJoules = [];
 
-const startDates = [];
-const kudosCounts = [];
-const achievementCounts = [];
-const polylines = [];
+var startDates = [];
+var kudosCounts = [];
+var achievementCounts = [];
+var polylines = [];
+
+window.addEventListener("load", (event) => {
+  getAuthorizationCodeFromUrl()
+});
 
 // Redirect the user to the Strava authorization page
 function redirectToStravaAuth() {
@@ -83,7 +87,7 @@ async function getStravaUserData() {
 // Check that all steps have been completed
 function check () {
     if (!code) {
-        redirectToStravaAuth();    
+       redirectToStravaAuth();  
     } else if (!accessToken) {
         console.log("Code Present")
         getAccessToken(code) 
