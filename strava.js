@@ -33,6 +33,7 @@ window.addEventListener("load", (event) => {
     console.log('Code Not Present on Load') 
   }
 });
+
 // Redirect the user to the Strava authorization page
 function redirectToStravaAuth() {
   console.log('Starting Auth Sequence')
@@ -45,9 +46,10 @@ function redirectToStravaAuth() {
 
 // Get the authorization code from the URL
 function getAuthorizationCodeFromUrl() {
-  const urlParams = new URLSearchParams(window.location.search);
-  console.log(urlParams.get('code'))
-  return urlParams.get('code');
+    const urlParams = new URLSearchParams(window.location.search);
+    code = urlParams.get('code');
+    console.log(code)
+    return code
 }
 
 // Exchange the authorization code for an access token
