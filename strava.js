@@ -95,7 +95,6 @@ async function getStravaUserData() {
 
 // Check that all steps have been completed
 function check() {
-    displayUserData()
     if (code) {
         console.log('Auth Code is Present')
     } else {
