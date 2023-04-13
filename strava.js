@@ -134,7 +134,7 @@ function displayUserData() {
 
 
 function getActivities() {
-    getAccessToken() 
+    getAccessToken(code) 
     const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}&per_page=99`
     fetch(activitiesLink)
     .then((allActivities) => {
@@ -213,4 +213,19 @@ function mapRides() {
                 ).addTo(map)
             }
 mapped = 1;
+}
+
+function bigBoyFunction {
+    if (!code) {
+        redirectToStravaAuth()
+    } else {
+        getAuthorizationCodeFromUrl()
+        getAccessToken()
+        getStravaUserData()
+        displayUserData()
+        getActivities()
+        getAllRidesData()
+        mapRides()
+    }
+    
 }
