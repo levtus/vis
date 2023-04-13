@@ -86,7 +86,7 @@ function check () {
     } else if (!accessToken) {
         console.log("Code Present")
         getAccessToken(code) 
-    } else if {!userdata} {
+    } else if (!userdata) {
         console.log("Access Token Present")
         getStravaUserData()
     } else {
