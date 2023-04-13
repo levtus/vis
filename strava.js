@@ -205,7 +205,7 @@ function mapRides() {
                     coordinates,
                     {
                         color: mapColor,
-                        weight:5,
+                        weight: 2,
                         opacity: opacity,
                         lineJoin:'round'
                     }
