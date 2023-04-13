@@ -227,5 +227,9 @@ function bigBoyFunction() {
         getAllRidesData()
         mapRides()
     }
+}
+    
+    
+console.log('blank')
     
 }
