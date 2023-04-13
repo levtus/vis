@@ -149,7 +149,7 @@ function activitiesExec() {
     }
 }
 
-function getActivites(){
+function getActivites() {
     getAccessToken(code) 
     const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}`
     fetch(activitiesLink)
