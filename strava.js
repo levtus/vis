@@ -1,10 +1,13 @@
 const clientId = '98135'
 const clientSecret = '250fb83eda23244fd4a165a4a8565f398a5e1e56';
 var userData
+var accessToken
 var startDate = 0;
 var endDate = 9999999999;
+var displayAmount = 999;
 var opacity = 1;
 var mapColor = "#000000"
+var userActivities
 
 const activityNames = [];
 const activityIds = [];
@@ -28,9 +31,7 @@ function redirectToStravaAuth() {
   const responseType = 'code';
   const scope = 'read,activity:read';
   const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
-
   window.location.href = authUrl;
-    
 }
 
 // Step 2: Get the authorization code from the URL
@@ -42,55 +43,57 @@ function getAuthorizationCodeFromUrl() {
 
 // Step 3: Exchange the authorization code for an access token
 async function getAccessToken(code) {
-  const tokenUrl = 'https://www.strava.com/oauth/token';
-  const response = await fetch(tokenUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      client_id: clientId,
-      client_secret: clientSecret,
-      code: code,
-      grant_type: 'authorization_code',
-    }),
-  });
-  
-  const data = await response.json();
-  console.log(data.acces_token)
-  return data.access_token;
+    const tokenUrl = 'https://www.strava.com/oauth/token';
+    if (typeof data.access_token != undefined) {
+        const response = await fetch(tokenUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+            body: JSON.stringify({
+                client_id: clientId,
+                client_secret: clientSecret,
+                code: code,
+                grant_type: 'authorization_code',
+        }),
+    });
+    const data = await response.json();
+    console.log(data.access_token)
+    } else {
+        console.log("Access Token Already Ready")
+    }
+    accessToken = data.access_token;
+    return data.access_token;
 }
 
 // Step 4: Use the access token to make requests to the Strava API
-async function getStravaUserData(accessToken) {
-  const apiUrl = 'https://www.strava.com/api/v3/athlete';
-  const response = await fetch(apiUrl, {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-    },
-  });
-
-  userData = await response.json();
-  console.log(userData);
-    
-  return userData;
+async function getStravaUserData() {
+    const apiUrl = 'https://www.strava.com/api/v3/athlete';
+    const response = fetch(apiUrl, {
+        headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        },
+    });
+    userData = await response.json();
+    console.log(userData);
+    return userData;
 }
 // Main function to authorize and get data from a Strava user
-async function main() {
-  const code = getAuthorizationCodeFromUrl();
-  const accessToken = await getAccessToken(code)
-  if (!code) {
-    redirectToStravaAuth();
-    await getStravaUserData(accessToken);
-  } else {
-    await getStravaUserData(accessToken);
-  }
-  return accessToken;
+function main () {
+    if (!code) {
+        redirectToStravaAuth();    
+    } else if (!accessToken) {
+        getAccessToken(code) 
+    } else if {!userdata} {
+        getStravaUserData()
+    }
 }
 
+
 function displayUserData() {
-    var accessToken = main()
-    var userdata = getStravaUserData(accessToken)
+    main()
+    main()
+    main()
     name = (userData.firstname + " " + userData.lastname)
     tag = ("@" + userData.username)
     profilePicture = userData.profile
@@ -104,22 +107,24 @@ function displayUserData() {
 }
 
 async function getAllUserRides() {
-    const accessToken = await main();
-    const apiUrl = `https://www.strava.com/api/v3/athlete/activities?before=${endDate}&after=${startDate}`;
-  const response = await fetch(apiUrl, {
+    main()
+    main()
+    main()
+    const apiUrl = `https://www.strava.com/api/v3/athlete/activities?before=${endDate}&after=${startDate}&per_page=${displayAmount}`;
+    const response = await fetch(apiUrl, {
     headers: {
       'Authorization': `Bearer ${accessToken}`,
     },
   });
-  var userActivities = await response.json();
+  userActivities = await response.json();
   console.log(userActivities);
   return userActivities;
-}
-
-                    
+} 
 
 function getAllRidesData() {
-    var userActivities = getAllUserRides()
+    if (!userActivities) {
+        getAllUserRides()
+    }
     for (let i = 0; i < userActivities.length; i++) {
        activityNames.push(userActivities[i].name);
        activityIds.push(userActivities[i].id);
@@ -135,14 +140,19 @@ function getAllRidesData() {
        kudosCounts.push(userActivities[i].kudos_count);
        achievementCounts.push(userActivities[i].achievement_count);     
   }
-  var mapStyle = document.getElementById('mapStyle').selectedOptions[0].value;
+}
+
+function mapRides() {
+    if (!polylines) {
+        getAllRidesData()
+    }
+    var mapStyle = document.getElementById('mapStyle').selectedOptions[0].value;
     if (mapStyle = "Heatmap") {
         opacity = 0.3;
     } else {
         opacity = 1;
-   }
-
-  for (let i = 0; i < polylines.length; i++) {
+    }
+    for (let i = 0; i < polylines.length; i++) {
         var coordinates = L.Polyline.fromEncoded(userActivities[i].map.summary_polyline).getLatLngs()
          L.polyline(
             coordinates,
