@@ -164,7 +164,7 @@ function gegettAllRidesData() {
     };
     for (let i = 0; i < allActivities.length; i++) {
        activityNames.push(allActivities[i].name);
-  get     activityIds.push(allActivities[i].id);
+       activityIds.push(allActivities[i].id);
        activityTypes.push(allActivities[i].type);
        isCommute.push(allActivities[i].commute);
        polylines.push(allActivities[i].map.summary_polyline)
