@@ -52,8 +52,6 @@ function getAuthorizationCodeFromUrl() {
     if (code) {
         console.log(code)
         return code
-    } else {
-        redirectToStravaAuth()
     }
 }
 
@@ -104,7 +102,6 @@ function check () {
             console.log('Auth Code is Present')
         } else {
             redirectToStravaAuth()
-            getAuthorizationCodeFromUrl()
         }
     }
     if (accessToken) {
