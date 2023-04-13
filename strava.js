@@ -1,6 +1,7 @@
 const clientId = '98135'
 const clientSecret = '250fb83eda23244fd4a165a4a8565f398a5e1e56';
 var code
+var allActivities
 var userData
 var data
 var accessToken
@@ -9,7 +10,6 @@ var endDate = (Date.now() / 1000 );
 var displayAmount = 999;
 var opacity = 1;
 var mapColor = "#000000"
-var userActivities
 
 const activityNames = [];
 const activityIds = [];
@@ -94,13 +94,13 @@ async function getStravaUserData() {
 }
 
 // Check that all steps have been completed
-function check () {
+function check() {
     if (code) {
         console.log('Auth Code is Present')
     } else {
         getAuthorizationCodeFromUrl()
         if (code) {
-            console.log('Auth Code is Present')
+            console.log('Auth Code Grabbed')
         } else {
             redirectToStravaAuth()
         }
@@ -113,14 +113,12 @@ function check () {
     if (userData) {
         console.log("User Data is Present")
     } else {
-        getStravaUserData()    
+        getStravaUserData()
+        displayUserData()
     }
 }
 
 function displayUserData() {
-    check()
-    check()
-    check()
     name = (userData.firstname + " " + userData.lastname)
     tag = ("@" + userData.username)
     profilePicture = userData.profile
@@ -133,33 +131,50 @@ function displayUserData() {
     document.querySelector('.profileTag').innerHTML=("@" + userData.username); 
 }
 
+function activitiesExec() {
+    if (allActivities) {
+        console.log('Activity Data is Present')
+    } else {
+        getActivities()
+    }
+    if (polylines) {
+        console.log('Rides Data Parsed')  
+    } else {
+        getAllRidesData()
+    }
+    if (mapped = 1) {
+        console.log('Ride Data Mapped')
+    } else {
+        mapRides()
+    }
+}
 
 function getActivites(){
     getAccessToken(code) 
     const activitiesLink = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}`
     fetch(activitiesLink)
-        .then((data) => console.log(data.json()))
+        .then((allActivities) => console.log(allActivities.json()))
 }
 
 function getAllRidesData() {
-    if (!userActivities) {
-        getAllUserRides()
-    }
-    for (let i = 0; i < userActivities.length; i++) {
-       activityNames.push(userActivities[i].name);
-       activityIds.push(userActivities[i].id);
-       activityTypes.push(userActivities[i].type);
-       isCommute.push(userActivities[i].commute);
-       polylines.push(userActivities[i].map.summary_polyline)
-       distances.push(userActivities[i].distance);
-       elapsedTimes.push(userActivities[i].elapsed_time);
-       movingTimes.push(userActivities[i].moving_time);
-       averageWatts.push(userActivities[i].average_watts);
-       kiloJoules.push(userActivities[i].kilojoules);
-       startDates.push(userActivities[i].start_date_local);
-       kudosCounts.push(userActivities[i].kudos_count);
-       achievementCounts.push(userActivities[i].achievement_count);     
-  }
+    if (!allActivities) {
+        getActivities()
+    };
+    for (let i = 0; i < allActivities.length; i++) {
+       activityNames.push(allActivities[i].name);
+       activityIds.push(allActivities[i].id);
+       activityTypes.push(allActivities[i].type);
+       isCommute.push(allActivities[i].commute);
+       polylines.push(allActivities[i].map.summary_polyline)
+       distances.push(allActivities[i].distance);
+       elapsedTimes.push(allActivities[i].elapsed_time);
+       movingTimes.push(allActivities[i].moving_time);
+       averageWatts.push(allActivities[i].average_watts);
+       kiloJoules.push(allActivities[i].kilojoules);
+       startDates.push(allActivities[i].start_date_local);
+       kudosCounts.push(allActivities[i].kudos_count);
+       achievementCounts.push(allActivities[i].achievement_count);     
+  };
 }
 
 function mapRides() {
@@ -173,7 +188,7 @@ function mapRides() {
         opacity = 1;
     }
     for (let i = 0; i < polylines.length; i++) {
-        var coordinates = L.Polyline.fromEncoded(userActivities[i].map.summary_polyline).getLatLngs()
+        var coordinates = L.Polyline.fromEncoded(allActivities[i].map.summary_polyline).getLatLngs()
          L.polyline(
             coordinates,
                 {
@@ -183,5 +198,6 @@ function mapRides() {
                 lineJoin:'round'
                 }
         ).addTo(map)
-  }
+    };
+    mapped = 1;
 }
