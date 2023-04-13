@@ -215,7 +215,7 @@ function mapRides() {
 mapped = 1;
 }
 
-function bigBoyFunction {
+function bigBoyFunction() {
     if (!code) {
         redirectToStravaAuth()
     } else {
